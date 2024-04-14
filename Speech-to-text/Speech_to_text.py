@@ -32,11 +32,14 @@ def Listen_audio():
 
                 # Slice text to fit on LCD Display
                 if len(text) > 16:
-                    for i in range(0,len(text),16):
+                    for i in range(0,len(text)):
                         shorten_text = text[i:i+16]
                         ser.write((shorten_text + '\n').encode()) 
-                        ser.write((sentiment + '\n').encode())   
+
+                        ser.write((sentiment + '\n').encode())  
+                        time.sleep(.2) 
                     print(sentiment)
+
 
                 else:
                     ser.write((text + '\n').encode())

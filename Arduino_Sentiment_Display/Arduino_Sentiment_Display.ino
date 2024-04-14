@@ -40,7 +40,7 @@ void loop() {
     else if (sentiment == "Positive"){
       digitalWrite(green_led, HIGH);
     }
-    delay(1750);
+    delay(200);
     digitalWrite(green_led, LOW);
     digitalWrite(red_led, LOW);
     digitalWrite(yellow_led, LOW);
