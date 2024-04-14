@@ -10,10 +10,10 @@ def print_result(annotations):
 
     sentiment = "Neutral"
 
-#    print("Overall Sentiment: score of", score, " with magnitude of", magnitude)
-    if((score > 0.5) & (magnitude > 0.25)):
+    print("Overall Sentiment: score of", score, " with magnitude of", magnitude)
+    if((score > 0.4) & (magnitude > 0.3)):
         sentiment = "Positive"
-    elif((score < -0.5) & (magnitude > 0.25)):
+    elif((score < -0.4) & (magnitude > 0.3)):
         sentiment = "Negative"
     else:
         sentiment = "Neutral"

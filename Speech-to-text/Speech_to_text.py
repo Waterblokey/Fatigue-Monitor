@@ -1,6 +1,7 @@
 import speech_recognition as sr
 from Sentiment_Analysis import *
 import serial
+import time
 
 # Initialize the recognizer
 r = sr.Recognizer()
@@ -8,10 +9,9 @@ r = sr.Recognizer()
 # Inizialize serial for sending data to arduino
 ser = serial.Serial('COM3', 9600, timeout=1)
 
-# Define the microphone as the audio source
 def Listen_audio():
     """ Constantly listen for incoming speech, then analyze the sentiment and send to arduino """
-    with sr.Microphone() as source:
+    with sr.Microphone() as source:    # Define the microphone as the audio source
         print("Listening...")
 
         while True:
@@ -28,12 +28,19 @@ def Listen_audio():
                 print("Recognized:", text)
                 
                 # Analyze sentiment of speech
-                text = analyze(text)
+                sentiment = analyze(text)
 
-                
-                print(text) 
-                # Write sentiment to arduino LCD Display and LED
-                ser.write((text + '\n').encode())
+                # Slice text to fit on LCD Display
+                if len(text) > 16:
+                    for i in range(0,len(text),16):
+                        shorten_text = text[i:i+16]
+                        ser.write((shorten_text + '\n').encode()) 
+                        ser.write((sentiment + '\n').encode())   
+                    print(sentiment)
+
+                else:
+                    ser.write((text + '\n').encode())
+                    ser.write((sentiment + '\n').encode())
                 
 
             except sr.UnknownValueError:

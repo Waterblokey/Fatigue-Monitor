@@ -1,5 +1,6 @@
 #include <LiquidCrystal.h>
 
+//initializes the LED Pins
 const int green_led = 9;
 const int yellow_led = 8;
 const int red_led = 7;
@@ -8,6 +9,7 @@ const int red_led = 7;
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
 void setup() {
+  //sets LED's to output 
   pinMode(green_led, OUTPUT);
   pinMode(yellow_led, OUTPUT);
   pinMode(red_led, OUTPUT);
@@ -24,22 +26,25 @@ void loop() {
     lcd.clear();  // Clear the display
     lcd.setCursor(0, 0); // Set the cursor to top-left position
     lcd.print(data); // Print new data on the LCD
-
-    if (data == "Neutral"){
+    String sentiment = Serial.readStringUntil('\n'); //read the sentiment text 
+    lcd.setCursor(0,1); //set cursor to the second row
+    lcd.print(sentiment); //prints the sentiment text to LCD display
+    
+//controls which LED color lights up depending on sentiment 
+    if (sentiment == "Neutral"){
       digitalWrite(yellow_led, HIGH);
-      delay(3000);
-      digitalWrite(yellow_led, LOW);
     }
-    else if (data == "Negative"){
+    else if (sentiment == "Negative"){
       digitalWrite(red_led, HIGH);
-      delay(3000);
-      digitalWrite(red_led, LOW);
     }
-    else if (data == "Positive"){
+    else if (sentiment == "Positive"){
       digitalWrite(green_led, HIGH);
-      delay(3000);
-      digitalWrite(green_led, LOW);
     }
-    delay(2000);
+    delay(1750);
+    digitalWrite(green_led, LOW);
+    digitalWrite(red_led, LOW);
+    digitalWrite(yellow_led, LOW);
+
+
   }
 }
