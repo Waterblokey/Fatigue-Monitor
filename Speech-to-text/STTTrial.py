@@ -1,6 +1,10 @@
 #Trial program using whisper to convert mp4 file to text
 
 import whisper
+from transformers import WhisperProcessor, WhisperForConditionalGeneration
+from datasets import load_dataset
+
+
 
 def STT():
     model = whisper.load_model("base")

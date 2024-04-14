@@ -1,17 +1,25 @@
-import argparse
 import google.cloud.language as language
-from STTTrial import *
-import random
+
 
 
 def print_result(annotations):
+    """Take text as document and analyze the sentiment, then return the sentiment."""
+
     score = annotations.document_sentiment.score
     magnitude = annotations.document_sentiment.magnitude
-    print("Overall Sentiment: score of", score, " with magnitude of", magnitude)
-    f = open("Speech-to-text/outro.txt", "a")
-    f.write(str(random.randint(0, 1000)))
-    f.close()
-    return score
+
+    sentiment = "Neutral"
+
+#    print("Overall Sentiment: score of", score, " with magnitude of", magnitude)
+    if((score > 0.5) & (magnitude > 0.25)):
+        sentiment = "Positive"
+    elif((score < -0.5) & (magnitude > 0.25)):
+        sentiment = "Negative"
+    else:
+        sentiment = "Neutral"
+
+    return sentiment
+
 
 def analyze(text):
     """Run a sentiment analysis request on text within a passed filename."""
@@ -21,5 +29,3 @@ def analyze(text):
     annotations = client.analyze_sentiment(request={'document': document})
 
     return print_result(annotations)
-
-#analyze(STT())
