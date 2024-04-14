@@ -2,7 +2,9 @@
 
 import whisper
 
-model = whisper.load_model("base")
-result = model.transcribe("Speech-to-text/outro.mp4", language="en")
-print(result["text"])
+def STT():
+    model = whisper.load_model("base")
+    result = model.transcribe("Speech-to-text/outro.mp4", language="en")
+    print(result["text"])
+    return(result["text"])
 
