@@ -30,7 +30,9 @@ def Listen_audio():
                 # Analyze sentiment of speech
                 text = analyze(text)
 
-                print(text)
+                
+                print(text) 
+                # Write sentiment to arduino LCD Display and LED
                 ser.write((text + '\n').encode())
                 
 

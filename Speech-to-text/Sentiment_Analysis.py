@@ -22,10 +22,13 @@ def print_result(annotations):
 
 
 def analyze(text):
-    """Run a sentiment analysis request on text within a passed filename."""
+    """Run a sentiment analysis request on passed in text."""
     client = language.LanguageServiceClient()
 
+    # Convert text to document for annotation
     document = language.Document(content=text, type_=language.Document.Type.PLAIN_TEXT)
+
+    # Run sentiment analysis on text
     annotations = client.analyze_sentiment(request={'document': document})
 
     return print_result(annotations)
