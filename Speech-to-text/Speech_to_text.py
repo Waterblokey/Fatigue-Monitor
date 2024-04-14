@@ -50,7 +50,6 @@ def Listen_audio():
                 print("Error:", e)
 
 
-
 if __name__ == "__main__":
     Listen_audio()
 
