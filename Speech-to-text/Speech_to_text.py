@@ -8,6 +8,7 @@ r = sr.Recognizer()
 # Inizialize serial for sending data to arduino
 ser = serial.Serial('COM3', 9600, timeout=1)
 
+# TODO: Don't see mic definition associated with lower comment
 # Define the microphone as the audio source
 def Listen_audio():
     """ Constantly listen for incoming speech, then analyze the sentiment and send to arduino """
@@ -43,7 +44,7 @@ def Listen_audio():
                 print("Error:", e)
 
 
-
+# TODO: Maybe code here to explain this if statement?
 if __name__ == "__main__":
     Listen_audio()
 
